@@ -15,13 +15,14 @@ const Employee = ({ user }) => {
     const [newEmail, setNewEmail] = useState('')
 
     const handleEditOrConfirm = () => {
-        if (edit === false) {
+        if (edit === false && remove === false) {
             setNewName(`${firstName}  ${lastName}`);
             setNewEmail(email);
-        } else if (remove === false) {
+        } else if (edit === true) {
+
+        } else if (remove === true) {
 
         }
-        setEdit(!edit)
     }
     const handleRemoveOrCancel = () => {
         if (edit) return setEdit(false);
@@ -35,15 +36,15 @@ const Employee = ({ user }) => {
                 <img src={photo} alt="" />
                 {
                     edit ?
-                        <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
+                        <>
+                            <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
+                            <input type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
+                        </>
                         :
-                        <div>{`${firstName}  ${lastName}`}</div>
-                }
-                {
-                    edit ?
-                        <input type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
-                        :
-                        <div>{email}</div>
+                        <>
+                            <div>{`${firstName}  ${lastName}`}</div>
+                            <div>{email}</div>
+                        </>
                 }
 
                 <div>
@@ -56,7 +57,7 @@ const Employee = ({ user }) => {
                 <div className="children">
                     {children && children.map(childId => {
                         const user = users[childId];
-                        return <Employee  key={childId} user={user}></Employee>
+                        return <Employee key={childId} user={user}></Employee>
                     })}
                 </div>
             }

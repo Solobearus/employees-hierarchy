@@ -1,34 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
 import './SignIn.css'
-import encode from '../../utils/encode'
 import { Context } from '../../context/Context'
 
 const SignIn = () => {
 
     const [username, setUsername] = useState('anthony.xiouping@xtreet.tvl');
     const [password, setPassword] = useState('mllv9n0x');
-    const { setUserLogged } = useContext(Context);
+    const { handleLogin } = useContext(Context);
 
-    const handleLogin = (encodedUserInformationFromLocalStorage) => {
-        let encodedUserInformation = encodedUserInformationFromLocalStorage;
-
-        if (!encodedUserInformation)
-            encodedUserInformation = encode(username, password);
-
-        fetch(`https://gongfetest.firebaseio.com/secrets/${encodedUserInformation}.json`)
-            .then(res => res.json())
-            .then(res => {
-                if (!res || res.error) {
-                    localStorage.removeItem("encodedUserInformation");
-                    setUserLogged(null);
-                } else {
-                    localStorage.setItem("encodedUserInformation", encodedUserInformation);
-                    setUserLogged(res);
-                }
-            })
-            .catch(err => console.error(err))
-    }
-
+    // if I left the site I will store the token in the local storage, 
+    // this way when I revisit I get to reauthenticate vs the server and login again automatically.
     useEffect(() => {
         const encodedUserInformation = localStorage.getItem("encodedUserInformation")
         if (encodedUserInformation) {
