@@ -4,8 +4,8 @@ import { Context } from '../../context/Context'
 
 const SignIn = () => {
 
-    const [username, setUsername] = useState('anthony.xiouping@xtreet.tvl');
-    const [password, setPassword] = useState('mllv9n0x');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('')
     const { handleLogin } = useContext(Context);
 
