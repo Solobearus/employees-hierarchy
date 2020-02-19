@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import './Tree.css'
 import { Context } from '../../context/Context'
 import Employee from '../Employee/Employee'
-import arrayToTree from '../../utils/arrayToTree'
 
 const Tree = () => {
 

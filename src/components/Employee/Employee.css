@@ -1,7 +1,7 @@
 .employee {
     width: 90%;
-    /* min-width: 1000px; */
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     border: var(--main-color) 5px solid;
     border-radius: 10px;
     margin: 5px;
@@ -16,11 +16,13 @@ img {
 }
 
 .children {
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
+    align-self: flex-end;
 }
 
 .info {
@@ -43,7 +45,7 @@ button {
 
 .openChildren{
     width: 140px;
-
+    align-self: center;
 }
 
 input{

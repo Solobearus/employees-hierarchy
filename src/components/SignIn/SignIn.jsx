@@ -30,7 +30,7 @@ const SignIn = () => {
                 placeholder='password'
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
-            <button onClick={() => handleLogin()}>Login</button>
+            <button onClick={() => handleLogin(null, username, password)}>Login</button>
         </div >
     )
 }

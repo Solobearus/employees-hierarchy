@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 import encode from '../utils/encode'
+import arrayToTree from '../utils/arrayToTree'
 
 const Context = createContext(null);
 const { Provider } = Context;
@@ -9,7 +10,7 @@ const ContextProvider = ({ children }) => {
     const [users, setUsers] = useState(null);
     const [userLogged, setUserLogged] = useState(null);
 
-    const handleLogin = (encodedUserInformationFromLocalStorage) => {
+    const handleLogin = (encodedUserInformationFromLocalStorage, username, password) => {
         let encodedUserInformation = encodedUserInformationFromLocalStorage;
 
         if (!encodedUserInformation)
@@ -41,21 +42,41 @@ const ContextProvider = ({ children }) => {
     }
 
     const handleUpdate = (updatedUser, userIndexInDB) => {
+        console.log(updatedUser);
 
         fetch(`https://gongfetest.firebaseio.com/users/${userIndexInDB}.json`,
             {
                 method: 'PATCH',
                 dataType: 'json',
                 contentType: 'application/json',
-                body: updatedUser
+                body: JSON.stringify(updatedUser)
             })
             .then(res => res.json())
             .then(res => {
+                res.error ?
+                    console.error(res.error) :
+                    handleFetchUsers();
+            })
+            .catch(err => console.error(err))
+    }
+    const handleRemove = (userIndexInDB) => {
+
+        fetch(`https://gongfetest.firebaseio.com/users/${userIndexInDB}.json`,
+            {
+                method: 'DELETE',
+                dataType: 'json',
+                contentType: 'application/json',
+            })
+            .then(res => res.json())
+            .then(res => {
+                res && res.error ?
+                    console.error(res.error) :
+                    handleFetchUsers();
+
                 console.log(res);
             })
             .catch(err => console.error(err))
     }
-
 
     return < Provider value={{
         users,
@@ -65,6 +86,7 @@ const ContextProvider = ({ children }) => {
         handleLogin,
         handleFetchUsers,
         handleUpdate,
+        handleRemove
     }}>{children}</Provider >
 }
 

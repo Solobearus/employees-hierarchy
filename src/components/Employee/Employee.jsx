@@ -5,29 +5,44 @@ import { Context } from '../../context/Context'
 
 const Employee = ({ user }) => {
 
-    const { firstName, lastName, email, photo, children } = user;
+    const { firstName, lastName, email, photo, children, userIndexInDB } = user;
 
-    const { users } = useContext(Context);
+    const { users, handleUpdate, handleRemove } = useContext(Context);
     const [openChildren, setOpenChildren] = useState(false);
     const [edit, setEdit] = useState(false);
     const [remove, setRemove] = useState(false)
-    const [newName, setNewName] = useState('')
+    const [newFirstName, setNewFirstName] = useState('')
+    const [newLastName, setNewLastName] = useState('')
     const [newEmail, setNewEmail] = useState('')
 
     const handleEditOrConfirm = () => {
         if (edit === false && remove === false) {
-            setNewName(`${firstName}  ${lastName}`);
+            setNewFirstName(firstName);
+            setNewLastName(lastName);
             setNewEmail(email);
+            setEdit(true);
         } else if (edit === true) {
-
+            const updatedUser = {
+                firstName: newFirstName,
+                lastName: newLastName,
+                email: newEmail
+            }
+            handleUpdate(updatedUser, userIndexInDB);
+            setEdit(false);
         } else if (remove === true) {
-
+            handleRemove(userIndexInDB)
+            setRemove(false);
         }
     }
+
     const handleRemoveOrCancel = () => {
-        if (edit) return setEdit(false);
-        if (remove) return setRemove(false);
-        return setRemove(true);
+        if (edit) {
+            setEdit(false);
+        } else if (remove) {
+            setRemove(false);
+        } else {
+            setRemove(true);
+        }
     }
 
     return (
@@ -37,7 +52,8 @@ const Employee = ({ user }) => {
                 {
                     edit ?
                         <>
-                            <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
+                            <input type="text" value={newFirstName} onChange={(e) => setNewFirstName(e.target.value)} />
+                            <input type="text" value={newLastName} onChange={(e) => setNewLastName(e.target.value)} />
                             <input type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
                         </>
                         :
