@@ -38,11 +38,12 @@ button {
     border-radius: 5px;
     border: var(--main-color) 5px solid;
     background-color: var(--main-color);
+    cursor: pointer;
 }
 
 .openChildren{
-    font-size: 36px;
-    text-align: center;
+    width: 140px;
+
 }
 
 input{

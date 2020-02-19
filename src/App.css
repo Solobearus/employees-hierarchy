@@ -1,10 +1,11 @@
 :root {
   --main-color: #7d0096;
   --secondery-color: #961100;
+  --main-gradient: linear-gradient(173deg, rgba(125, 0, 150, 1) 0%, rgba(150, 17, 0, 1) 100%);
 }
 
 #root {
-  background-color: var(--main-color);
+  background: var(--main-gradient);
   width: 100%;
   display: flex;
   flex-direction: row;

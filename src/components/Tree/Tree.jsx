@@ -29,7 +29,7 @@ const Tree = () => {
     return (
         <div className="tree" data-testid="tree">
             <div className="header">
-                <div>
+                <div className="username">
                     {users && `${users[userLogged].firstName} ${users[userLogged].lastName}`}
                 </div>
                 <button onClick={() => setUserLogged(null)}>
@@ -38,9 +38,7 @@ const Tree = () => {
             </div>
             {users && Object.keys(users).map(userId =>
                 !users[userId].managerId &&
-                <Employee user={users[userId]}>
-
-                </Employee>
+                <Employee key={userId} user={users[userId]}></Employee>
             )}
         </div>
     )

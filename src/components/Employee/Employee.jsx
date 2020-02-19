@@ -10,7 +10,7 @@ const Employee = ({ user }) => {
     const { users } = useContext(Context);
     const [openChildren, setOpenChildren] = useState(false);
     const [edit, setEdit] = useState(false);
-    const [remove, setremove] = useState(false)
+    const [remove, setRemove] = useState(false)
     const [newName, setNewName] = useState('')
     const [newEmail, setNewEmail] = useState('')
 
@@ -18,13 +18,15 @@ const Employee = ({ user }) => {
         if (edit === false) {
             setNewName(`${firstName}  ${lastName}`);
             setNewEmail(email);
-        }else if(remove === false){
+        } else if (remove === false) {
 
         }
         setEdit(!edit)
     }
     const handleRemoveOrCancel = () => {
-
+        if (edit) return setEdit(false);
+        if (remove) return setRemove(false);
+        return setRemove(true);
     }
 
     return (
@@ -54,11 +56,15 @@ const Employee = ({ user }) => {
                 <div className="children">
                     {children && children.map(childId => {
                         const user = users[childId];
-                        return <Employee user={user}></Employee>
+                        return <Employee  key={childId} user={user}></Employee>
                     })}
                 </div>
             }
-            {children && <div className="openChildren" onClick={() => setOpenChildren(!openChildren)}>{openChildren ? "👆" : "👇"}</div>}
+            {children && <button
+                className="openChildren"
+                onClick={() => setOpenChildren(!openChildren)}>
+                {openChildren ? "hide employees" : "show employees"}
+            </button>}
         </div >
     )
 }
