@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Tree.css'
 import { Context } from '../../context/Context'
 import Employee from '../Employee/Employee'
@@ -6,7 +6,6 @@ import Employee from '../Employee/Employee'
 const Tree = () => {
 
     const { userLogged, users, handleFetchUsers, setUsers, setUserLogged } = useContext(Context);
-    const [userLoggedDetails, setUserLoggedDetails] = useState()
 
     useEffect(() => {
         handleFetchUsers();
