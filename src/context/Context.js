@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useCallback } from 'react'
 import encode from '../utils/encode'
 import arrayToTree from '../utils/arrayToTree'
 
@@ -31,16 +31,19 @@ const ContextProvider = ({ children }) => {
             .catch(err => console.error(err))
     }
 
-    const handleFetchUsers = () => {
-        fetch(`https://gongfetest.firebaseio.com/users.json`)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res) {
-                    setUsers(arrayToTree(res));
-                }
-            })
-            .catch(err => console.error(err))
-    }
+    const handleFetchUsers = useCallback(
+        () => {
+            fetch(`https://gongfetest.firebaseio.com/users.json`)
+                .then((res) => res.json())
+                .then((res) => {
+                    if (res) {
+                        setUsers(arrayToTree(res));
+                    }
+                })
+                .catch(err => console.error(err))
+        },
+        [],
+    )
 
     const handleUpdate = (updatedUser, userIndexInDB) => {
 
@@ -59,6 +62,7 @@ const ContextProvider = ({ children }) => {
             })
             .catch(err => console.error(err))
     }
+
     const handleRemove = (userIndexInDB) => {
 
         fetch(`https://gongfetest.firebaseio.com/users/${userIndexInDB}.json`,

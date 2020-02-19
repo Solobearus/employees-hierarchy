@@ -12,7 +12,7 @@ const Tree = () => {
         return () => {
             setUsers(null);
         };
-    }, []);
+    }, [handleFetchUsers,setUsers]);
 
     const handleLogout = () => {
         localStorage.removeItem("encodedUserInformation");

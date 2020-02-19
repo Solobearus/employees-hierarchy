@@ -16,7 +16,7 @@ const SignIn = () => {
         if (encodedUserInformation) {
             handleLogin(encodedUserInformation);
         }
-    }, [])
+    }, [handleLogin])
 
     return (
         < div className="signIn" data-testid="signIn">
