@@ -1,3 +1,11 @@
 .signIn{
+    background: #fff;
+    height: 400px;
+    width: 1000px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     
 }

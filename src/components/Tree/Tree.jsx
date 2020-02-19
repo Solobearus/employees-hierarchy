@@ -24,7 +24,10 @@ const Tree = () => {
         };
     }, []);
 
-
+    const handleLogout = () => {
+        localStorage.removeItem("encodedUserInformation");
+        setUserLogged(null)
+    }
 
     return (
         <div className="tree" data-testid="tree">
@@ -32,7 +35,7 @@ const Tree = () => {
                 <div className="username">
                     {users && `${users[userLogged].firstName} ${users[userLogged].lastName}`}
                 </div>
-                <button onClick={() => setUserLogged(null)}>
+                <button onClick={() => handleLogout()}>
                     Logout
                 </button>
             </div>
