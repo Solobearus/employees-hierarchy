@@ -1,0 +1,50 @@
+.employee {
+    width: 90%;
+    /* min-width: 1000px; */
+    align-items: center;
+    border: var(--main-color) 5px solid;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 8px 15px;
+    transition: all 5s ease-in;
+}
+
+img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.children {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.info {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    width: 70px;
+    margin: 5px;
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+    border: var(--main-color) 5px solid;
+    background-color: var(--main-color);
+}
+
+.openChildren{
+    font-size: 36px;
+    text-align: center;
+}
+
+input{
+    width: 300px;
+}
