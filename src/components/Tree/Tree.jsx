@@ -6,19 +6,11 @@ import arrayToTree from '../../utils/arrayToTree'
 
 const Tree = () => {
 
-    const { userLogged, users, setUsers, setUserLogged } = useContext(Context);
+    const { userLogged, users, handleFetchUsers, setUsers, setUserLogged } = useContext(Context);
     const [userLoggedDetails, setUserLoggedDetails] = useState()
 
     useEffect(() => {
-        fetch(`https://gongfetest.firebaseio.com/users.json`)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res) {
-                    setUsers(arrayToTree(res));
-                }
-            })
-            .catch(err => console.error(err))
-
+        handleFetchUsers();
         return () => {
             setUsers(null);
         };

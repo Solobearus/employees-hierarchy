@@ -2,7 +2,7 @@ export default (array) => {
 
     const tree = {}
 
-    array.forEach(user => { tree[user.id] = user })
+    array.forEach((user, index) => { tree[user.id] = { ...user, userIndexInDB: index } })
 
     Object.keys(tree).forEach(userId => {
 
