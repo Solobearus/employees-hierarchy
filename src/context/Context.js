@@ -43,7 +43,6 @@ const ContextProvider = ({ children }) => {
     }
 
     const handleUpdate = (updatedUser, userIndexInDB) => {
-        console.log(updatedUser);
 
         fetch(`https://gongfetest.firebaseio.com/users/${userIndexInDB}.json`,
             {
@@ -73,8 +72,6 @@ const ContextProvider = ({ children }) => {
                 res && res.error ?
                     console.error(res.error) :
                     handleFetchUsers();
-
-                console.log(res);
             })
             .catch(err => console.error(err))
     }

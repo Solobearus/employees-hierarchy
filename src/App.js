@@ -8,8 +8,6 @@ function App() {
 
   const { userLogged } = useContext(Context)
 
-  console.log(userLogged);
-  
   return (
     userLogged ?
       <Tree></Tree>
