@@ -6,6 +6,7 @@ const SignIn = () => {
 
     const [username, setUsername] = useState('anthony.xiouping@xtreet.tvl');
     const [password, setPassword] = useState('mllv9n0x');
+    const [loginError, setLoginError] = useState('')
     const { handleLogin } = useContext(Context);
 
     // if I left the site I will store the token in the local storage, 
@@ -20,17 +21,26 @@ const SignIn = () => {
     return (
         < div className="signIn" data-testid="signIn">
             <h1>Please Login</h1>
-            <input
-                type="text"
-                placeholder='username'
-                value={username}
-                onChange={e => setUsername(e.target.value)} />
-            <input
-                type="password"
-                placeholder='password'
-                value={password}
-                onChange={e => setPassword(e.target.value)} />
-            <button onClick={() => handleLogin(null, username, password)}>Login</button>
+            < div className="wrapper" data-testid="signIn">
+                <div className="loginError">{loginError}</div>
+                <div className="inputLabel">
+                    <div className="label">Email adress: </div>
+                    <input
+                        type="text"
+                        placeholder='username'
+                        value={username}
+                        onChange={e => setUsername(e.target.value)} />
+                </div>
+                <div className="inputLabel">
+                    <div className="label">password: </div>
+                    <input
+                        type="password"
+                        placeholder='password'
+                        value={password}
+                        onChange={e => setPassword(e.target.value)} />
+                </div>
+                <button onClick={() => { handleLogin(null, username, password, setLoginError) }}>Login</button>
+            </div >
         </div >
     )
 }

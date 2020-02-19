@@ -10,7 +10,7 @@ const ContextProvider = ({ children }) => {
     const [users, setUsers] = useState(null);
     const [userLogged, setUserLogged] = useState(null);
 
-    const handleLogin = (encodedUserInformationFromLocalStorage, username, password) => {
+    const handleLogin = (encodedUserInformationFromLocalStorage, username, password, setLoginError) => {
         let encodedUserInformation = encodedUserInformationFromLocalStorage;
 
         if (!encodedUserInformation)
@@ -22,6 +22,7 @@ const ContextProvider = ({ children }) => {
                 if (!res || res.error) {
                     localStorage.removeItem("encodedUserInformation");
                     setUserLogged(null);
+                    setLoginError && setLoginError('user and password is invalid');
                 } else {
                     localStorage.setItem("encodedUserInformation", encodedUserInformation);
                     setUserLogged(res);

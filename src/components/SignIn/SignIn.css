@@ -1,11 +1,33 @@
-.signIn{
+.wrapper {
     background: #fff;
-    height: 400px;
-    width: 1000px;
+    height: 200px;
+    width: 600px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    
+}
+
+h1 {
+    color: #fff;
+}
+
+.loginError {
+    color: red;
+    height: 1em;
+}
+
+.label {
+    text-align: end;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.inputLabel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
