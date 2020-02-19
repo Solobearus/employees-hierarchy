@@ -5,12 +5,11 @@ import { Context } from '../../context/Context'
 
 const SignIn = () => {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('anthony.xiouping@xtreet.tvl');
+    const [password, setPassword] = useState('mllv9n0x');
     const { setUserLogged } = useContext(Context);
 
     const handleLogin = (encodedUserInformationFromLocalStorage) => {
-
         let encodedUserInformation = encodedUserInformationFromLocalStorage;
 
         if (!encodedUserInformation)
@@ -19,9 +18,12 @@ const SignIn = () => {
         fetch(`https://gongfetest.firebaseio.com/secrets/${encodedUserInformation}.json`)
             .then(res => res.json())
             .then(res => {
-                if (res) {
-                    setUserLogged(res)
-                    localStorage.setItem("encodedUserInformation", encodedUserInformation)
+                if (!res || res.error) {
+                    localStorage.removeItem("encodedUserInformation");
+                    setUserLogged(null);
+                } else {
+                    localStorage.setItem("encodedUserInformation", encodedUserInformation);
+                    setUserLogged(res);
                 }
             })
             .catch(err => console.error(err))
@@ -45,7 +47,7 @@ const SignIn = () => {
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={() => handleLogin()}>Login</button>
         </div >
     )
 }

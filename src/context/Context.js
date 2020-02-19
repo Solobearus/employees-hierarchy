@@ -5,7 +5,7 @@ const { Provider } = Context;
 
 const ContextProvider = ({ children }) => {
 
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
     const [userLogged, setUserLogged] = useState(null);
 
     

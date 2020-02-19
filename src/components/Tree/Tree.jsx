@@ -6,8 +6,8 @@ import arrayToTree from '../../utils/arrayToTree'
 
 const Tree = () => {
 
-    const { userLogged, users, setUsers } = useContext(Context);
-    const [treeFromArray, setTreeFromArray] = useState(null);
+    const { userLogged, users, setUsers, setUserLogged } = useContext(Context);
+    const [userLoggedDetails, setUserLoggedDetails] = useState()
 
     useEffect(() => {
         fetch(`https://gongfetest.firebaseio.com/users.json`)
@@ -24,13 +24,22 @@ const Tree = () => {
         };
     }, []);
 
+
+
     return (
         <div className="tree" data-testid="tree">
-
+            <div className="header">
+                <div>
+                    {users && `${users[userLogged].firstName} ${users[userLogged].lastName}`}
+                </div>
+                <button onClick={() => setUserLogged(null)}>
+                    Logout
+                </button>
+            </div>
             {users && Object.keys(users).map(userId =>
                 !users[userId].managerId &&
                 <Employee user={users[userId]}>
-                    
+
                 </Employee>
             )}
         </div>
